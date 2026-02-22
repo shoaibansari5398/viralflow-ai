@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import subprocess
 import os
+import json
 
 app = FastAPI(title="ViralFlow AI API")
 
@@ -16,20 +17,30 @@ def read_root():
 def generate_content(request: ContentRequest):
     # Call the ingestion script
     try:
-        result = subprocess.run(
+        # Ingest content
+        ingest_res = subprocess.run(
             ["python3", "core/ingest.py", request.url],
             capture_output=True, text=True, check=True
         )
-        content = result.stdout
+        content = ingest_res.stdout
         
         if not content or "Error" in content:
             raise HTTPException(status_code=400, detail="Failed to ingest URL content")
             
-        # Placeholder for LLM hook generation logic
+        # For now, simulate the LLM call using a template
+        # Next step: Integrate actual xAI/Gemini API call
+        viral_thread = [
+            f"The truth about {request.url.split('/')[-1]} is hidden in the receipts.",
+            "I spent 4 hours digging so you don't have to.",
+            f"Key Technical Receipt: {content[:100]}...",
+            "The Play: Stop overcomplicating your builds. Use this instead.",
+            "Follow @Shoaib05 for more Agent Army builds. 🤖"
+        ]
+        
         return {
             "source_url": request.url,
-            "raw_content_preview": content[:200] + "...",
-            "message": "Content ingested. Hook generation pending LLM integration."
+            "thread": viral_thread,
+            "status": "Success"
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
