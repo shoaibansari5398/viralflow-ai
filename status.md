@@ -10,13 +10,13 @@ Convert GitHub, Docs, and YouTube links into viral X/LinkedIn content.
 - [x] Phase 3: FastAPI Backend
 - [x] Phase 4: Viral Logic Integration (Templates)
 - [ ] Phase 5: Live LLM API Connection (xAI/Gemini)
-- [ ] Phase 6: CLI Tool (`viralflow`)
+- [x] Phase 6: CLI Tool (`viralflow.py`)
 
 ## Current Status
-- [x] API now returns a structured "Viral Thread" based on ingested content.
-- [x] Template-based generation logic integrated into `app.py`.
-- [x] All progress synced to GitHub.
-- Starting on the CLI tool to allow manual generation via terminal.
+- [x] CLI tool completed. You can now run `python3 viralflow.py [URL]` to generate threads.
+- [x] API updated to handle raw text previews.
+- [x] Code pushed to GitHub.
+- Working on Phase 5: Live LLM API Connection (xAI integration).
 
 ## Next Update
 Scheduled for T+15m. Scheduled cron `ViralFlow Update Ping` is active.
